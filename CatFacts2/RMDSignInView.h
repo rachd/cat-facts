@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol RMDSignInViewDelegate <NSObject>
+
+@required
+- (void)registerUser:(id)sender;
+
+@end
+
 @interface RMDSignInView : UIView <UITextFieldDelegate>
 
+@property (nonatomic, weak) id <RMDSignInViewDelegate> delegate;
 @property (nonatomic, strong) UITextField *emailField;
 @property (nonatomic, strong) UITextField *passwordField;
 

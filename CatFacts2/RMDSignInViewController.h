@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RMDSignInView.h"
 
-@interface RMDSignInViewController : UIViewController
+@interface RMDSignInViewController : UIViewController <RMDSignInViewDelegate>
 
 @end

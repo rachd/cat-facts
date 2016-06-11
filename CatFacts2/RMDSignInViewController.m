@@ -7,7 +7,6 @@
 //
 
 #import "RMDSignInViewController.h"
-#import "RMDSignInView.h"
 
 @interface RMDSignInViewController ()
 
@@ -20,8 +19,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.signInView = [[RMDSignInView alloc] initWithFrame:self.view.frame];
-    self.view = self.signInView;
+    [self.view addSubview:self.signInView];
     
+}
+
+- (void)registerUser:(id)sender {
+
 }
 
 - (void)didReceiveMemoryWarning {

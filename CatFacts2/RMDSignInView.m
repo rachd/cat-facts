@@ -8,6 +8,12 @@
 
 #import "RMDSignInView.h"
 
+@interface RMDSignInView ()
+
+@property (nonatomic, strong) UIButton *submitButton;
+
+@end
+
 @implementation RMDSignInView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -15,6 +21,7 @@
     if (self) {
         [self setUpEmailField];
         [self setUpPasswordField];
+        [self setUpSubmitButton];
     }
     return self;
 }
@@ -30,6 +37,13 @@
     self.passwordField.placeholder = @"Password";
     self.passwordField.secureTextEntry = YES;
     [self addSubview:self.passwordField];
+}
+
+- (void)setUpSubmitButton {
+    self.submitButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width / 4, 140, self.frame.size.width / 2, 40)];
+    self.submitButton.backgroundColor = [UIColor blueColor];
+    [self.submitButton addTarget:self.delegate action:@selector(registerUser:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.submitButton];
 }
 
 @end
