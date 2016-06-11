@@ -6,6 +6,7 @@
 target 'CatFacts2' do
 
 pod 'Firebase'
+pod 'Firebase/Auth'
 
 end
 

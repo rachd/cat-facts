@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@import Firebase;
 #import "RMDSignInView.h"
 
 @interface RMDSignInViewController : UIViewController <RMDSignInViewDelegate>
