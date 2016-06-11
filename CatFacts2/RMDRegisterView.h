@@ -1,5 +1,5 @@
 //
-//  RMDSignInView.h
+//  RMDRegisterView.h
 //  CatFacts2
 //
 //  Created by Rachel Dorn on 6/11/16.
@@ -8,17 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol RMDSignInViewDelegate <NSObject>
+@protocol RMDRegisterViewDelegate <NSObject>
 
 @required
-- (void)signInUser;
-- (void)showRegisterView;
+- (void)registerUser;
 
 @end
 
-@interface RMDSignInView : UIView <UITextFieldDelegate>
+@interface RMDRegisterView : UIView <UITextFieldDelegate>
 
-@property (nonatomic, weak) id <RMDSignInViewDelegate> delegate;
+@property (nonatomic, weak) id <RMDRegisterViewDelegate> delegate;
 @property (nonatomic, strong) UITextField *emailField;
 @property (nonatomic, strong) UITextField *passwordField;
 

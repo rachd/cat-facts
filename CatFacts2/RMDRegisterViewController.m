@@ -1,59 +1,42 @@
 //
-//  RMDSignInViewController.m
+//  RMDRegisterViewController.m
 //  CatFacts2
 //
 //  Created by Rachel Dorn on 6/11/16.
 //  Copyright © 2016 Rachel Dorn. All rights reserved.
 //
 
-#import "RMDSignInViewController.h"
 #import "RMDRegisterViewController.h"
 
-@interface RMDSignInViewController ()
+@interface RMDRegisterViewController ()
 
-@property (nonatomic, strong) RMDSignInView *signInView;
+@property (nonatomic, strong) RMDRegisterView *registerView;
 
 @end
 
-@implementation RMDSignInViewController
+@implementation RMDRegisterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.signInView = [[RMDSignInView alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:self.signInView];
+    self.registerView = [[RMDRegisterView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:self.registerView];
     
     UINavigationItem *navItem = self.navigationItem;
-    navItem.title = @"Sign In";
+    navItem.title = @"Register";
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    FIRUser *user = [FIRAuth auth].currentUser;
+- (void)registerUser {
+    NSString *email = self.registerView.emailField.text;
+    NSString *password = self.registerView.passwordField.text;
     
-    if (user != nil) {
-        [self dismissViewControllerAnimated:NO completion:nil];
-    } else {
-        // No user is signed in.
-    }
-}
-
-- (void)signInUser {
-    NSString *email = self.signInView.emailField.text;
-    NSString *password = self.signInView.passwordField.text;
-    
-    [[FIRAuth auth] signInWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+    [[FIRAuth auth] createUserWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+        NSLog(@"%@", user);
         if (error) {
             [self presentAlertWithTitle:@"Error" message:@"Could not register user.  Ensure a valid email and internet connection and try again."];
         } else {
-            self.signInView.emailField.text = nil;
-            self.signInView.passwordField.text = nil;
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
-}
-
-- (void)showRegisterView {
-    RMDRegisterViewController *registerVC = [[RMDRegisterViewController alloc] init];
-    [self.navigationController pushViewController:registerVC animated:YES];
 }
 
 - (void)presentAlertWithTitle:(NSString *)title message:(NSString *)message {
@@ -75,7 +58,7 @@
                                               otherButtonTitles: nil];
         [alert show];
     }
-
+    
 }
 
 - (void)didReceiveMemoryWarning {

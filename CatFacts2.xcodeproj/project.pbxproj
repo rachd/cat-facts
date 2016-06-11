@@ -18,6 +18,9 @@
 		CC9620441D0A5C2F0093C647 /* RMDCatFacts.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9620431D0A5C2F0093C647 /* RMDCatFacts.m */; };
 		CCC299261D0C559A0042D0F0 /* RMDSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC299251D0C559A0042D0F0 /* RMDSignInViewController.m */; };
 		CCC299291D0C55BE0042D0F0 /* RMDSignInView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC299281D0C55BE0042D0F0 /* RMDSignInView.m */; };
+		CCC2992E1D0C7FEB0042D0F0 /* RMDFactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC2992D1D0C7FEB0042D0F0 /* RMDFactsTableViewController.m */; };
+		CCC299331D0C86580042D0F0 /* RMDRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC299321D0C86580042D0F0 /* RMDRegisterViewController.m */; };
+		CCC299361D0C86670042D0F0 /* RMDRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC299351D0C86670042D0F0 /* RMDRegisterView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,12 @@
 		CCC299251D0C559A0042D0F0 /* RMDSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDSignInViewController.m; sourceTree = "<group>"; };
 		CCC299271D0C55BE0042D0F0 /* RMDSignInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDSignInView.h; sourceTree = "<group>"; };
 		CCC299281D0C55BE0042D0F0 /* RMDSignInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDSignInView.m; sourceTree = "<group>"; };
+		CCC2992C1D0C7FEB0042D0F0 /* RMDFactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDFactsTableViewController.h; sourceTree = "<group>"; };
+		CCC2992D1D0C7FEB0042D0F0 /* RMDFactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDFactsTableViewController.m; sourceTree = "<group>"; };
+		CCC299311D0C86580042D0F0 /* RMDRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDRegisterViewController.h; sourceTree = "<group>"; };
+		CCC299321D0C86580042D0F0 /* RMDRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDRegisterViewController.m; sourceTree = "<group>"; };
+		CCC299341D0C86670042D0F0 /* RMDRegisterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDRegisterView.h; sourceTree = "<group>"; };
+		CCC299351D0C86670042D0F0 /* RMDRegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDRegisterView.m; sourceTree = "<group>"; };
 		E4464F07F61FE372E855E17B /* Pods-CatFacts2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatFacts2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CatFacts2/Pods-CatFacts2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +142,8 @@
 			children = (
 				CC9620121D0A5BD80093C647 /* AppDelegate.h */,
 				CC9620131D0A5BD80093C647 /* AppDelegate.m */,
+				CCC2992F1D0C7FEF0042D0F0 /* Facts */,
+				CCC299301D0C863F0042D0F0 /* Register */,
 				CCC2992A1D0C55C40042D0F0 /* Sign In */,
 				CCC2992B1D0C55DB0042D0F0 /* Model */,
 				CC96201B1D0A5BD80093C647 /* Assets.xcassets */,
@@ -188,6 +199,26 @@
 				CC9620431D0A5C2F0093C647 /* RMDCatFacts.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		CCC2992F1D0C7FEF0042D0F0 /* Facts */ = {
+			isa = PBXGroup;
+			children = (
+				CCC2992C1D0C7FEB0042D0F0 /* RMDFactsTableViewController.h */,
+				CCC2992D1D0C7FEB0042D0F0 /* RMDFactsTableViewController.m */,
+			);
+			name = Facts;
+			sourceTree = "<group>";
+		};
+		CCC299301D0C863F0042D0F0 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				CCC299341D0C86670042D0F0 /* RMDRegisterView.h */,
+				CCC299351D0C86670042D0F0 /* RMDRegisterView.m */,
+				CCC299311D0C86580042D0F0 /* RMDRegisterViewController.h */,
+				CCC299321D0C86580042D0F0 /* RMDRegisterViewController.m */,
+			);
+			name = Register;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,7 +406,10 @@
 				CC9620441D0A5C2F0093C647 /* RMDCatFacts.m in Sources */,
 				CC9620141D0A5BD80093C647 /* AppDelegate.m in Sources */,
 				CCC299261D0C559A0042D0F0 /* RMDSignInViewController.m in Sources */,
+				CCC299331D0C86580042D0F0 /* RMDRegisterViewController.m in Sources */,
 				CC9620111D0A5BD80093C647 /* main.m in Sources */,
+				CCC2992E1D0C7FEB0042D0F0 /* RMDFactsTableViewController.m in Sources */,
+				CCC299361D0C86670042D0F0 /* RMDRegisterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
