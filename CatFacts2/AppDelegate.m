@@ -23,7 +23,10 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     RMDSignInViewController *signInVC = [[RMDSignInViewController alloc] init];
-    self.window.rootViewController = signInVC;
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:signInVC];
+    
+    self.window.rootViewController = navController;
     
     [self.window makeKeyAndVisible];
     

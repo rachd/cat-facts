@@ -21,6 +21,13 @@
     self.signInView = [[RMDSignInView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:self.signInView];
     
+    UINavigationItem *navItem = self.navigationItem;
+    navItem.title = @"Sign In";
+    
+    //
+    //    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
+    //    navItem.rightBarButtonItem = addButton;
+    //    navItem.leftBarButtonItem = self.editButtonItem;
 }
 
 - (void)registerUser:(id)sender {
@@ -29,7 +36,32 @@
     
     [[FIRAuth auth] createUserWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
         NSLog(@"%@", user);
+        if (error) {
+            [self presentAlertWithTitle:@"Error" message:@"Could not register user.  Ensure a valid email and internet connection and try again."];
+        }
     }];
+}
+
+- (void)presentAlertWithTitle:(NSString *)title message:(NSString *)message {
+    if ([UIAlertController class]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title                                                                       message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:dismissAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles: nil];
+        [alert show];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
