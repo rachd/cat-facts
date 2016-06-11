@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "RMDSignInViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [FIRApp configure];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    RMDSignInViewController *signInVC = [[RMDSignInViewController alloc] init];
+    self.window.rootViewController = signInVC;
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

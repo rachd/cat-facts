@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		76EB59503E317B17C18C0741 /* libPods-CatFacts2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65EC1F3F783600777C6A78DA /* libPods-CatFacts2.a */; };
+		CC86C0381D0C53050043DBC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC86C0371D0C53050043DBC9 /* GoogleService-Info.plist */; };
 		CC9620111D0A5BD80093C647 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9620101D0A5BD80093C647 /* main.m */; };
 		CC9620141D0A5BD80093C647 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9620131D0A5BD80093C647 /* AppDelegate.m */; };
-		CC9620171D0A5BD80093C647 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9620161D0A5BD80093C647 /* ViewController.m */; };
 		CC96201C1D0A5BD80093C647 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC96201B1D0A5BD80093C647 /* Assets.xcassets */; };
 		CC96201F1D0A5BD80093C647 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC96201D1D0A5BD80093C647 /* LaunchScreen.storyboard */; };
 		CC96202A1D0A5BD80093C647 /* CatFacts2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9620291D0A5BD80093C647 /* CatFacts2Tests.m */; };
 		CC9620351D0A5BD90093C647 /* CatFacts2UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9620341D0A5BD90093C647 /* CatFacts2UITests.m */; };
 		CC9620441D0A5C2F0093C647 /* RMDCatFacts.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9620431D0A5C2F0093C647 /* RMDCatFacts.m */; };
+		CCC299261D0C559A0042D0F0 /* RMDSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC299251D0C559A0042D0F0 /* RMDSignInViewController.m */; };
+		CCC299291D0C55BE0042D0F0 /* RMDSignInView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC299281D0C55BE0042D0F0 /* RMDSignInView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,12 +38,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		65EC1F3F783600777C6A78DA /* libPods-CatFacts2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CatFacts2.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FC0267BAFF9F935D8D77F3D /* Pods-CatFacts2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatFacts2.release.xcconfig"; path = "Pods/Target Support Files/Pods-CatFacts2/Pods-CatFacts2.release.xcconfig"; sourceTree = "<group>"; };
+		CC86C0371D0C53050043DBC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CC96200C1D0A5BD80093C647 /* CatFacts2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatFacts2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC9620101D0A5BD80093C647 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CC9620121D0A5BD80093C647 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CC9620131D0A5BD80093C647 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CC9620151D0A5BD80093C647 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CC9620161D0A5BD80093C647 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CC96201B1D0A5BD80093C647 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC96201E1D0A5BD80093C647 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC9620201D0A5BD80093C647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,6 +56,11 @@
 		CC9620361D0A5BD90093C647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC9620421D0A5C2F0093C647 /* RMDCatFacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDCatFacts.h; sourceTree = "<group>"; };
 		CC9620431D0A5C2F0093C647 /* RMDCatFacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDCatFacts.m; sourceTree = "<group>"; };
+		CCC299241D0C559A0042D0F0 /* RMDSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDSignInViewController.h; sourceTree = "<group>"; };
+		CCC299251D0C559A0042D0F0 /* RMDSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDSignInViewController.m; sourceTree = "<group>"; };
+		CCC299271D0C55BE0042D0F0 /* RMDSignInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDSignInView.h; sourceTree = "<group>"; };
+		CCC299281D0C55BE0042D0F0 /* RMDSignInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDSignInView.m; sourceTree = "<group>"; };
+		E4464F07F61FE372E855E17B /* Pods-CatFacts2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatFacts2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CatFacts2/Pods-CatFacts2.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76EB59503E317B17C18C0741 /* libPods-CatFacts2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +89,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4924E7989B4111B5127E0BAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				65EC1F3F783600777C6A78DA /* libPods-CatFacts2.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		716C76D0AD44981ED043B0C1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E4464F07F61FE372E855E17B /* Pods-CatFacts2.debug.xcconfig */,
+				9FC0267BAFF9F935D8D77F3D /* Pods-CatFacts2.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CC9620031D0A5BD80093C647 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +113,8 @@
 				CC9620281D0A5BD80093C647 /* CatFacts2Tests */,
 				CC9620331D0A5BD90093C647 /* CatFacts2UITests */,
 				CC96200D1D0A5BD80093C647 /* Products */,
+				716C76D0AD44981ED043B0C1 /* Pods */,
+				4924E7989B4111B5127E0BAC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,13 +133,12 @@
 			children = (
 				CC9620121D0A5BD80093C647 /* AppDelegate.h */,
 				CC9620131D0A5BD80093C647 /* AppDelegate.m */,
-				CC9620421D0A5C2F0093C647 /* RMDCatFacts.h */,
-				CC9620431D0A5C2F0093C647 /* RMDCatFacts.m */,
-				CC9620151D0A5BD80093C647 /* ViewController.h */,
-				CC9620161D0A5BD80093C647 /* ViewController.m */,
+				CCC2992A1D0C55C40042D0F0 /* Sign In */,
+				CCC2992B1D0C55DB0042D0F0 /* Model */,
 				CC96201B1D0A5BD80093C647 /* Assets.xcassets */,
 				CC96201D1D0A5BD80093C647 /* LaunchScreen.storyboard */,
 				CC9620201D0A5BD80093C647 /* Info.plist */,
+				CC86C0371D0C53050043DBC9 /* GoogleService-Info.plist */,
 				CC96200F1D0A5BD80093C647 /* Supporting Files */,
 			);
 			path = CatFacts2;
@@ -142,6 +170,26 @@
 			path = CatFacts2UITests;
 			sourceTree = "<group>";
 		};
+		CCC2992A1D0C55C40042D0F0 /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				CCC299271D0C55BE0042D0F0 /* RMDSignInView.h */,
+				CCC299281D0C55BE0042D0F0 /* RMDSignInView.m */,
+				CCC299241D0C559A0042D0F0 /* RMDSignInViewController.h */,
+				CCC299251D0C559A0042D0F0 /* RMDSignInViewController.m */,
+			);
+			name = "Sign In";
+			sourceTree = "<group>";
+		};
+		CCC2992B1D0C55DB0042D0F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CC9620421D0A5C2F0093C647 /* RMDCatFacts.h */,
+				CC9620431D0A5C2F0093C647 /* RMDCatFacts.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,9 +197,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC9620391D0A5BD90093C647 /* Build configuration list for PBXNativeTarget "CatFacts2" */;
 			buildPhases = (
+				891E342D569FC7B2C5F08FF6 /* Check Pods Manifest.lock */,
 				CC9620081D0A5BD80093C647 /* Sources */,
 				CC9620091D0A5BD80093C647 /* Frameworks */,
 				CC96200A1D0A5BD80093C647 /* Resources */,
+				9332800B0E22170C7BA9B4CD /* Embed Pods Frameworks */,
+				736BEE26EF14A22AE1C29DC2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -247,6 +298,7 @@
 			files = (
 				CC96201F1D0A5BD80093C647 /* LaunchScreen.storyboard in Resources */,
 				CC96201C1D0A5BD80093C647 /* Assets.xcassets in Resources */,
+				CC86C0381D0C53050043DBC9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,14 +318,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		736BEE26EF14A22AE1C29DC2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CatFacts2/Pods-CatFacts2-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		891E342D569FC7B2C5F08FF6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9332800B0E22170C7BA9B4CD /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CatFacts2/Pods-CatFacts2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CC9620081D0A5BD80093C647 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCC299291D0C55BE0042D0F0 /* RMDSignInView.m in Sources */,
 				CC9620441D0A5C2F0093C647 /* RMDCatFacts.m in Sources */,
-				CC9620171D0A5BD80093C647 /* ViewController.m in Sources */,
 				CC9620141D0A5BD80093C647 /* AppDelegate.m in Sources */,
+				CCC299261D0C559A0042D0F0 /* RMDSignInViewController.m in Sources */,
 				CC9620111D0A5BD80093C647 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,6 +506,7 @@
 		};
 		CC96203A1D0A5BD90093C647 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4464F07F61FE372E855E17B /* Pods-CatFacts2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CatFacts2/Info.plist;
@@ -416,6 +518,7 @@
 		};
 		CC96203B1D0A5BD90093C647 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FC0267BAFF9F935D8D77F3D /* Pods-CatFacts2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CatFacts2/Info.plist;
@@ -490,6 +593,7 @@
 				CC96203B1D0A5BD90093C647 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CC96203C1D0A5BD90093C647 /* Build configuration list for PBXNativeTarget "CatFacts2Tests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +602,7 @@
 				CC96203E1D0A5BD90093C647 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CC96203F1D0A5BD90093C647 /* Build configuration list for PBXNativeTarget "CatFacts2UITests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +611,7 @@
 				CC9620411D0A5BD90093C647 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
