@@ -9,9 +9,11 @@
 #import "RMDFactsTableViewController.h"
 #import "RMDSignInViewController.h"
 
-@interface RMDFactsTableViewController ()
+@interface RMDFactsTableViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property UINavigationController *signInNavVC;
+@property (nonatomic, strong) UINavigationController *signInNavVC;
+@property (nonatomic, strong) NSArray *facts;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -29,14 +31,26 @@
     self.signInNavVC = [[UINavigationController alloc] initWithRootViewController:signInVC];
     
     FIRUser *user = [FIRAuth auth].currentUser;
+    self.facts = [[NSArray alloc] init];
     
     if (user != nil) {
-        // User is signed in.
+        NSString *userID = [FIRAuth auth].currentUser.uid;
+        [[[[[FIRDatabase database] reference] child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            // Get user value
+            self.facts = snapshot.value[@"facts"];
+            [self setUpTable];
+        } withCancelBlock:^(NSError * _Nonnull error) {
+            NSLog(@"%@", error.localizedDescription);
+        }];
     } else {
         // No user is signed in.
         [self presentViewController:self.signInNavVC animated:YES completion:nil];
     }
-    
+}
+
+- (void)setUpTable {
+    NSLog(@"%@", self.facts);
+    self.tableView = [[UITableView alloc] initWithFrame:[self.view bounds] style:UITableViewStylePlain];
 }
 
 - (void)logOut {
@@ -60,24 +74,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-//#pragma mark - Table view data source
-//
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return 1;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return 10;
-//}
-//
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-//    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
-//    // Configure the cell...
-//    
-//    return cell;
-//}
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.facts count];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.textLabel.text = [self.facts objectAtIndex:indexPath.row];
+    
+    return cell;
+}
 
 
 /*

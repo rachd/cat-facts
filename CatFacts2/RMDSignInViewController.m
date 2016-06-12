@@ -27,6 +27,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    self.signInView.emailField.text = nil;
+    self.signInView.passwordField.text = nil;
+    
     FIRUser *user = [FIRAuth auth].currentUser;
     
     if (user != nil) {
@@ -42,10 +45,8 @@
     
     [[FIRAuth auth] signInWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
         if (error) {
-            [self presentAlertWithTitle:@"Error" message:@"Could not register user.  Ensure a valid email and internet connection and try again."];
+            [self presentAlertWithTitle:@"Error" message:@"Could not register user. Ensure a valid email and internet connection and try again."];
         } else {
-            self.signInView.emailField.text = nil;
-            self.signInView.passwordField.text = nil;
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
