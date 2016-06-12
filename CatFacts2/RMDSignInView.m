@@ -20,7 +20,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
         [self setUpEmailField];
         [self setUpPasswordField];
         [self setUpSubmitButton];
@@ -32,6 +32,7 @@
 - (void)setUpEmailField {
     self.emailField = [[UITextField alloc] initWithFrame:CGRectMake(20, 100, self.frame.size.width - 40, 40)];
     self.emailField.placeholder = @"Email Address";
+    self.emailField.borderStyle = UITextBorderStyleRoundedRect;
     [self addSubview:self.emailField];
 }
 
@@ -39,12 +40,13 @@
     self.passwordField = [[UITextField alloc] initWithFrame:CGRectMake(20, 160, self.frame.size.width - 40, 40)];
     self.passwordField.placeholder = @"Password";
     self.passwordField.secureTextEntry = YES;
+    self.passwordField.borderStyle = UITextBorderStyleRoundedRect;
     [self addSubview:self.passwordField];
 }
 
 - (void)setUpSubmitButton {
     self.submitButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width / 4, 220, self.frame.size.width / 2, 40)];
-    self.submitButton.backgroundColor = [UIColor blueColor];
+    self.submitButton.backgroundColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0];
     self.submitButton.layer.cornerRadius = 8;
     [self.submitButton setTitle:@"Sign In" forState:UIControlStateNormal];
     [self.submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -54,14 +56,14 @@
 }
 
 - (void)setUpRegisterSection {
-    UILabel *registerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 320, self.frame.size.width - 40, 40)];
+    UILabel *registerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 320, self.frame.size.width, 40)];
     registerLabel.text = @"Don't have an account?";
     registerLabel.textColor = [UIColor blackColor];
     registerLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:registerLabel];
     
-    self.registerButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width / 4, 380, self.frame.size.width / 2, 40)];
-    self.registerButton.backgroundColor = [UIColor blueColor];
+    self.registerButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width / 4, 370, self.frame.size.width / 2, 40)];
+    self.registerButton.backgroundColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0];
     self.registerButton.layer.cornerRadius = 8;
     [self.registerButton setTitle:@"Register" forState:UIControlStateNormal];
     [self.registerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

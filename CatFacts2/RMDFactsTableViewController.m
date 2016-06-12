@@ -29,6 +29,8 @@
 
     RMDSignInViewController *signInVC = [[RMDSignInViewController alloc] init];
     self.signInNavVC = [[UINavigationController alloc] initWithRootViewController:signInVC];
+    [self.signInNavVC.navigationBar setTintColor:[UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0]];
+
     
     FIRUser *user = [FIRAuth auth].currentUser;
     self.facts = [[NSArray alloc] init];

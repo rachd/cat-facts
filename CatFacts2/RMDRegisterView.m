@@ -22,7 +22,7 @@
         [self setUpEmailField];
         [self setUpPasswordField];
         [self setUpSubmitButton];
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
     }
     return self;
 }
@@ -30,6 +30,7 @@
 - (void)setUpEmailField {
     self.emailField = [[UITextField alloc] initWithFrame:CGRectMake(20, 100, self.frame.size.width - 40, 40)];
     self.emailField.placeholder = @"Email Address";
+    self.emailField.borderStyle = UITextBorderStyleRoundedRect;
     [self addSubview:self.emailField];
 }
 
@@ -37,12 +38,13 @@
     self.passwordField = [[UITextField alloc] initWithFrame:CGRectMake(20, 160, self.frame.size.width - 40, 40)];
     self.passwordField.placeholder = @"Password";
     self.passwordField.secureTextEntry = YES;
+    self.passwordField.borderStyle = UITextBorderStyleRoundedRect;
     [self addSubview:self.passwordField];
 }
 
 - (void)setUpSubmitButton {
     self.submitButton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width / 4, 220, self.frame.size.width / 2, 40)];
-    self.submitButton.backgroundColor = [UIColor blueColor];
+    self.submitButton.backgroundColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0];
     self.submitButton.layer.cornerRadius = 8;
     [self.submitButton setTitle:@"Register" forState:UIControlStateNormal];
     [self.submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
