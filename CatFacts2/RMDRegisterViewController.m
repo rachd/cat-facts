@@ -29,25 +29,34 @@
     NSString *email = self.registerView.emailField.text;
     NSString *password = self.registerView.passwordField.text;
     
+    NSMutableArray *facts = [[NSMutableArray alloc] init];
     [[FIRAuth auth] createUserWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
-        NSLog(@"%@", user);
         if (error) {
             [self presentAlertWithTitle:@"Error" message:@"Could not register user. Ensure a valid email and internet connection and try again."];
         } else {
-            [self fetchFacts:100 success:^(NSArray *response) {
-                [[[[[FIRDatabase database] reference] child:@"users"] child:user.uid]
-                 setValue:@{@"facts": response}];
-                [self dismissViewControllerAnimated:YES completion:nil];
-            } failure:^(NSError *error) {
-                [self presentAlertWithTitle:@"Error" message:@"Could not retrieve facts. Please check your internet connection and try again"];
-            }];
+            [self retrieveAllFacts:facts user:user];
         }
     }];
 }
 
-- (void)fetchFacts:(int)number success:(void (^)(NSArray *response))success failure:(void(^)(NSError* error))failure {
+- (void)retrieveAllFacts:(NSMutableArray *)factsArray user:(FIRUser *)user {
+    NSLog(@"looped");
+    if ([factsArray count] == 10) {
+        [[[[[FIRDatabase database] reference] child:@"users"] child:user.uid] setValue:@{@"facts":factsArray}];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [self fetchFacts:^(NSArray *response) {
+            [factsArray addObject:response];
+            [self retrieveAllFacts:factsArray user:user];
+        } failure:^(NSError *error) {
+            [self presentAlertWithTitle:@"Error" message:@"Could not retrieve facts. Please check your internet connection and try again"];
+        }];
+    }
+}
+
+- (void)fetchFacts:(void (^)(NSArray *response))success failure:(void(^)(NSError* error))failure {
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://catfacts-api.appspot.com/api/facts?number=%d", number]] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://catfacts-api.appspot.com/api/facts?number=100"]] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (response) {
             NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             dispatch_async(dispatch_get_main_queue(), ^{

@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor purpleColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     UINavigationItem *navItem = self.navigationItem;
     navItem.title = @"Cat Facts";
     
@@ -31,44 +31,57 @@
     self.signInNavVC = [[UINavigationController alloc] initWithRootViewController:signInVC];
     [self.signInNavVC.navigationBar setTintColor:[UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0]];
 
-    
-    FIRUser *user = [FIRAuth auth].currentUser;
-    self.facts = [[NSArray alloc] init];
-    
-    if (user != nil) {
-        NSString *userID = [FIRAuth auth].currentUser.uid;
-        [[[[[FIRDatabase database] reference] child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            // Get user value
-            self.facts = snapshot.value[@"facts"];
-            [self setUpTable];
-        } withCancelBlock:^(NSError * _Nonnull error) {
-            NSLog(@"%@", error.localizedDescription);
-        }];
-    } else {
-        // No user is signed in.
-        [self presentViewController:self.signInNavVC animated:YES completion:nil];
-    }
+    self.facts = [[NSArray alloc] initWithObjects:@"One", @"Two", @"Three", @"This is a really long cell value to test the custom cells that should conform to the height of the text contained within them.", nil];
+    [self setUpTable];
+//    [self logOut];
+//    [self presentViewController:self.signInNavVC animated:YES completion:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+//    FIRUser *user = [FIRAuth auth].currentUser;
+//    self.facts = [[NSArray alloc] init];
+//    
+//    if (user != nil) {
+//        NSString *userID = [FIRAuth auth].currentUser.uid;
+//        [[[[[FIRDatabase database] reference] child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+//            // Get user value
+//            if (snapshot.value[@"facts"]) {
+//                self.facts = snapshot.value[@"facts"];
+//                [self setUpTable];
+//            } else {
+//                NSLog(@"no facts in database");
+//            }
+//
+//        } withCancelBlock:^(NSError * _Nonnull error) {
+//            NSLog(@"%@", error.localizedDescription);
+//        }];
+//    } else {
+//        // No user is signed in.
+//        [self presentViewController:self.signInNavVC animated:YES completion:nil];
+//    }
 }
 
 - (void)setUpTable {
-    NSLog(@"%@", self.facts);
     self.tableView = [[UITableView alloc] initWithFrame:[self.view bounds] style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
 }
 
 - (void)logOut {
-    FIRUser *user = [FIRAuth auth].currentUser;
-    
-    if (user != nil) {
-        // User is signed in.
-        NSError *error;
-        [[FIRAuth auth] signOut:&error];
-        if (!error) {
-            [self presentViewController:self.signInNavVC animated:YES completion:nil];
-        }
-    } else {
-        // No user is signed in.
-        return;
-    }
+//    FIRUser *user = [FIRAuth auth].currentUser;
+//    
+//    if (user != nil) {
+//        // User is signed in.
+//        NSError *error;
+//        [[FIRAuth auth] signOut:&error];
+//        if (!error) {
+//            [self presentViewController:self.signInNavVC animated:YES completion:nil];
+//        }
+//    } else {
+//        // No user is signed in.
+//        return;
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,15 +96,25 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"%d", [self.facts count]);
     return [self.facts count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     cell.textLabel.text = [self.facts objectAtIndex:indexPath.row];
-    
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.numberOfLines = 0;
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *str = [self.facts objectAtIndex:indexPath.row];
+    CGSize size = [str sizeWithFont:[UIFont fontWithName:@"Helvetica" size:17] constrainedToSize:CGSizeMake(280, 999) lineBreakMode:NSLineBreakByWordWrapping];
+    NSLog(@"%f",size.height);
+    return size.height + 30;
 }
 
 
