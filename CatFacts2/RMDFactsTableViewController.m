@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
     UINavigationItem *navItem = self.navigationItem;
     navItem.title = @"Cat Facts";
     
@@ -48,8 +48,10 @@
     self.tableView = [[UITableView alloc] initWithFrame:[self.view bounds] style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
     static NSString *cellIdentifier = @"cell";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
 }
 
@@ -95,6 +97,12 @@
     cell.textLabel.numberOfLines = 0;
     cell.imageView.image = [UIImage imageNamed:@"CatFace"];
     cell.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    if (indexPath.row % 2 == 0) {
+        cell.contentView.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
+    } else {
+        cell.contentView.backgroundColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0];
+        cell.textLabel.textColor = [UIColor whiteColor];
+    }
     return cell;
 }
 

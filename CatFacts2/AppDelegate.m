@@ -19,12 +19,13 @@
     [FIRApp configure];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
     
     self.factsVC = [[RMDFactsTableViewController alloc] init];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.factsVC];
-    
+    [navController.navigationBar setTintColor:[UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0]];
+    [navController.navigationBar setBarTintColor:[UIColor colorWithRed:1 green:0.929 blue:0.784 alpha:1.0]];
     self.window.rootViewController = navController;
     
     [self.window makeKeyAndVisible];
