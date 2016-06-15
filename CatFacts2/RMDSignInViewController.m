@@ -28,8 +28,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.signInView.emailField.text = nil;
-    self.signInView.passwordField.text = nil;
     
     FIRUser *user = [FIRAuth auth].currentUser;
     
@@ -53,8 +51,10 @@
         if (error) {
             [self presentAlertWithTitle:@"Error" message:@"Could not register user. Ensure a valid email and internet connection and try again."];
         } else {
-            [RMDUser login:[NSString stringWithFormat:@"%@", user.uid]];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [RMDUser login:[NSString stringWithFormat:@"%@", user.uid] success:^(void) {
+                NSLog(@"in signin vc %lu", (unsigned long)[[RMDUser currentUser].facts count]);
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
         }
     }];
 }

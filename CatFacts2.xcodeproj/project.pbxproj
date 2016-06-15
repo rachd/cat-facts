@@ -15,7 +15,6 @@
 		CC96201F1D0A5BD80093C647 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC96201D1D0A5BD80093C647 /* LaunchScreen.storyboard */; };
 		CC96202A1D0A5BD80093C647 /* CatFacts2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9620291D0A5BD80093C647 /* CatFacts2Tests.m */; };
 		CC9620351D0A5BD90093C647 /* CatFacts2UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9620341D0A5BD90093C647 /* CatFacts2UITests.m */; };
-		CC9620441D0A5C2F0093C647 /* RMDCatFacts.m in Sources */ = {isa = PBXBuildFile; fileRef = CC9620431D0A5C2F0093C647 /* RMDCatFacts.m */; };
 		CCC299261D0C559A0042D0F0 /* RMDSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC299251D0C559A0042D0F0 /* RMDSignInViewController.m */; };
 		CCC299291D0C55BE0042D0F0 /* RMDSignInView.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC299281D0C55BE0042D0F0 /* RMDSignInView.m */; };
 		CCC2992E1D0C7FEB0042D0F0 /* RMDFactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CCC2992D1D0C7FEB0042D0F0 /* RMDFactsTableViewController.m */; };
@@ -58,8 +57,6 @@
 		CC9620301D0A5BD90093C647 /* CatFacts2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatFacts2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC9620341D0A5BD90093C647 /* CatFacts2UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CatFacts2UITests.m; sourceTree = "<group>"; };
 		CC9620361D0A5BD90093C647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CC9620421D0A5C2F0093C647 /* RMDCatFacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDCatFacts.h; sourceTree = "<group>"; };
-		CC9620431D0A5C2F0093C647 /* RMDCatFacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDCatFacts.m; sourceTree = "<group>"; };
 		CCC299241D0C559A0042D0F0 /* RMDSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDSignInViewController.h; sourceTree = "<group>"; };
 		CCC299251D0C559A0042D0F0 /* RMDSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMDSignInViewController.m; sourceTree = "<group>"; };
 		CCC299271D0C55BE0042D0F0 /* RMDSignInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMDSignInView.h; sourceTree = "<group>"; };
@@ -198,8 +195,6 @@
 		CCC2992B1D0C55DB0042D0F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CC9620421D0A5C2F0093C647 /* RMDCatFacts.h */,
-				CC9620431D0A5C2F0093C647 /* RMDCatFacts.m */,
 				CCDD33A01D10CB8E00CF731B /* RMDUser.h */,
 				CCDD33A11D10CB8E00CF731B /* RMDUser.m */,
 			);
@@ -408,7 +403,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCC299291D0C55BE0042D0F0 /* RMDSignInView.m in Sources */,
-				CC9620441D0A5C2F0093C647 /* RMDCatFacts.m in Sources */,
 				CC9620141D0A5BD80093C647 /* AppDelegate.m in Sources */,
 				CCC299261D0C559A0042D0F0 /* RMDSignInViewController.m in Sources */,
 				CCC299331D0C86580042D0F0 /* RMDRegisterViewController.m in Sources */,
