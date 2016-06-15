@@ -8,6 +8,7 @@
 
 #import "RMDSignInViewController.h"
 #import "RMDRegisterViewController.h"
+#import "RMDUser.h"
 
 @interface RMDSignInViewController ()
 
@@ -47,6 +48,7 @@
         if (error) {
             [self presentAlertWithTitle:@"Error" message:@"Could not register user. Ensure a valid email and internet connection and try again."];
         } else {
+            [RMDUser login:[NSString stringWithFormat:@"%@", user.uid]];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];

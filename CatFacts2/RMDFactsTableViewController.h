@@ -10,4 +10,6 @@
 
 @interface RMDFactsTableViewController : UIViewController
 
+- (void)logOut;
+
 @end

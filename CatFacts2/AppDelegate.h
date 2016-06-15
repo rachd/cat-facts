@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 @import Firebase;
+#import "RMDFactsTableViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (strong, nonatomic) RMDFactsTableViewController *factsVC;
 
 @end
 

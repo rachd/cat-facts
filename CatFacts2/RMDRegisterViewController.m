@@ -7,6 +7,7 @@
 //
 
 #import "RMDRegisterViewController.h"
+#import "RMDUser.h"
 
 @interface RMDRegisterViewController ()
 
@@ -43,6 +44,7 @@
     NSLog(@"looped");
     if ([factsArray count] == 10) {
         [[[[[FIRDatabase database] reference] child:@"users"] child:user.uid] setValue:@{@"facts":factsArray}];
+        [RMDUser login:[NSString stringWithFormat:@"%@", user.uid] withFacts:factsArray];
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         [self fetchFacts:^(NSArray *response) {

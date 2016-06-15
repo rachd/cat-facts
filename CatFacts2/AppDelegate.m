@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "RMDFactsTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,9 +21,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    RMDFactsTableViewController *factsVC = [[RMDFactsTableViewController alloc] init];
+    self.factsVC = [[RMDFactsTableViewController alloc] init];
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:factsVC];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.factsVC];
     
     self.window.rootViewController = navController;
     
@@ -39,8 +38,7 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [self.factsVC logOut];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
