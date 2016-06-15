@@ -40,6 +40,11 @@
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    self.signInView.emailField.text = nil;
+    self.signInView.passwordField.text = nil;
+}
+
 - (void)signInUser {
     NSString *email = self.signInView.emailField.text;
     NSString *password = self.signInView.passwordField.text;

@@ -26,6 +26,11 @@
     navItem.title = @"Register";
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    self.registerView.emailField.text = nil;
+    self.registerView.passwordField.text = nil;
+}
+
 - (void)registerUser {
     NSString *email = self.registerView.emailField.text;
     NSString *password = self.registerView.passwordField.text;

@@ -83,21 +83,18 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"%lu", (unsigned long)[self.facts count]);
     return [self.facts count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    //if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        cell.textLabel.text = [self.facts objectAtIndex:indexPath.row];
-        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        cell.textLabel.numberOfLines = 0;
-        cell.imageView.image = [UIImage imageNamed:@"CatFace"];
-        cell.imageView.translatesAutoresizingMaskIntoConstraints = NO;
-   // }
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    cell.textLabel.text = [self.facts objectAtIndex:indexPath.row];
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.numberOfLines = 0;
+    cell.imageView.image = [UIImage imageNamed:@"CatFace"];
+    cell.imageView.translatesAutoresizingMaskIntoConstraints = NO;
     return cell;
 }
 
