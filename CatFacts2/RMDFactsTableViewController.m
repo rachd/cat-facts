@@ -31,43 +31,25 @@
     RMDSignInViewController *signInVC = [[RMDSignInViewController alloc] init];
     self.signInNavVC = [[UINavigationController alloc] initWithRootViewController:signInVC];
     [self.signInNavVC.navigationBar setTintColor:[UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0]];
-
-    self.facts = [[NSArray alloc] initWithObjects:@"One", @"Two", @"Three", @"This is a really long cell value to test the custom cells that should conform to the height of the text contained within them.", nil];
     [self setUpTable];
-    //[self presentViewController:self.signInNavVC animated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-//    FIRUser *user = [FIRAuth auth].currentUser;
-    self.facts = [[NSArray alloc] init];
-    self.facts = [RMDUser currentUser].facts;
-    NSLog(@"current user count %lu", (unsigned long)[[RMDUser currentUser].facts count]);
-
-//
-//    if (user != nil) {
-//        NSString *userID = [FIRAuth auth].currentUser.uid;
-//        [[[[[FIRDatabase database] reference] child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-//            // Get user value
-//            if (snapshot.value[@"facts"]) {
-//                self.facts = snapshot.value[@"facts"];
-//                [self setUpTable];
-//            } else {
-//                NSLog(@"no facts in database");
-//            }
-//
-//        } withCancelBlock:^(NSError * _Nonnull error) {
-//            NSLog(@"%@", error.localizedDescription);
-//        }];
-//    } else {
-//        // No user is signed in.
-//        [self presentViewController:self.signInNavVC animated:YES completion:nil];
-//    }
+    if ([RMDUser currentUser]) {
+        self.facts = [[NSArray alloc] init];
+        self.facts = [RMDUser currentUser].facts;
+        [self.tableView reloadData];
+    } else {
+        [self presentViewController:self.signInNavVC animated:YES completion:nil];
+    }
 }
 
 - (void)setUpTable {
     self.tableView = [[UITableView alloc] initWithFrame:[self.view bounds] style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    static NSString *cellIdentifier = @"cell";
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
     [self.view addSubview:self.tableView];
 }
 
@@ -84,6 +66,7 @@
         }
     } else {
         // No user is signed in.
+        [self presentViewController:self.signInNavVC animated:YES completion:nil];
         return;
     }
 }
@@ -107,15 +90,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
+    //if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
         cell.textLabel.text = [self.facts objectAtIndex:indexPath.row];
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.textLabel.numberOfLines = 0;
-        
         cell.imageView.image = [UIImage imageNamed:@"CatFace"];
         cell.imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    }
+   // }
     return cell;
 }
 
