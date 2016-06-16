@@ -95,14 +95,30 @@
     cell.textLabel.text = [self.facts objectAtIndex:indexPath.row];
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.textLabel.numberOfLines = 0;
-    cell.imageView.image = [UIImage imageNamed:@"CatFace"];
     cell.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.row % 2 == 0) {
         cell.contentView.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
+        cell.imageView.image = [UIImage imageNamed:@"CatFace"];
     } else {
         cell.contentView.backgroundColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0];
         cell.textLabel.textColor = [UIColor whiteColor];
+        cell.imageView.image = [UIImage imageNamed:@"CatFace2"];
     }
+//    NSDictionary *nameMap = @{@"imageView" : cell.imageView};
+//    NSArray *heightConstraint = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[imageView(==50)]"
+//                                                                             options:0
+//                                                                             metrics:nil
+//                                                                               views:nameMap];
+//    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:cell.contentView
+//                                                                       attribute:NSLayoutAttributeHeight
+//                                                                       relatedBy:NSLayoutRelationEqual
+//                                                                          toItem:cell.contentView
+//                                                                       attribute:NSLayoutAttributeWidth
+//                                                                      multiplier:1
+//                                                                        constant:0];
+//    [cell.contentView addConstraints:heightConstraint];
+//    [cell.contentView addConstraint:widthConstraint];
     return cell;
 }
 
@@ -110,7 +126,7 @@
 {
     NSString *str = [self.facts objectAtIndex:indexPath.row];
     CGSize size = [str sizeWithFont:[UIFont fontWithName:@"Helvetica" size:17] constrainedToSize:CGSizeMake(280, 999) lineBreakMode:NSLineBreakByWordWrapping];
-    return size.height + 30;
+    return MAX(120, size.height + 30);
 }
 
 
