@@ -36,8 +36,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     if ([RMDUser currentUser]) {
-        self.facts = [[NSArray alloc] init];
-        self.facts = [RMDUser currentUser].facts;
+        _facts = [[NSArray alloc] init];
+        _facts = [RMDUser currentUser].facts;
+        
         [self.tableView reloadData];
     } else {
         [self presentViewController:self.signInNavVC animated:YES completion:nil];
