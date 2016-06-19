@@ -18,7 +18,7 @@
 + (void)login:(NSString *)uid success:(void (^)(void))success {
     RMDUser *user = [[RMDUser alloc] init];
     [user setUserID:uid];
-    [self fetchFacts:user success:^{
+    [self fetchFacts:user page:1 success:^{
         NSData *encodedUserObject = [NSKeyedArchiver archivedDataWithRootObject:user];
         
         [[NSUserDefaults standardUserDefaults] setObject:encodedUserObject forKey:@"user"];
@@ -29,10 +29,10 @@
 + (void)login:(NSString *)uid withFacts:(NSArray *)facts {
     RMDUser *user = [[RMDUser alloc] init];
     [user setUserID:uid];
-    [user setFacts:[self formatFacts:facts]];
-     NSData *encodedUserObject = [NSKeyedArchiver archivedDataWithRootObject:user];
+    [user setFacts:facts];//[self formatFacts:facts]];
+    NSData *encodedUserObject = [NSKeyedArchiver archivedDataWithRootObject:user];
      
-     [[NSUserDefaults standardUserDefaults] setObject:encodedUserObject forKey:@"user"];
+    [[NSUserDefaults standardUserDefaults] setObject:encodedUserObject forKey:@"user"];
 }
 
 - (void)logout {
@@ -60,13 +60,12 @@
     return objectCopy;
 }
 
-+ (void)fetchFacts:(RMDUser *)user success:(void (^)(void))success {
++ (void)fetchFacts:(RMDUser *)user page:(int)page success:(void (^)(void))success {
     NSString *userID = [FIRAuth auth].currentUser.uid;
     [[[[[FIRDatabase database] reference] child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         // Get user value
         if (snapshot.value[@"facts"]) {
-            user.facts = [self formatFacts:snapshot.value[@"facts"]];
-            NSLog(@"in fetch %lu", (unsigned long)[user.facts count]);
+            user.facts = snapshot.value[@"facts"][page];//[self formatFacts:snapshot.value[@"facts"]];
             success();
         } else {
             NSLog(@"no facts in database");

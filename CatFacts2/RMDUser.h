@@ -18,6 +18,7 @@
 
 + (void)login:(NSString *)userID success:(void (^)(void))success;
 + (void)login:(NSString *)userID withFacts:(NSArray *)facts;
++ (void)fetchFacts:(RMDUser *)user page:(int)page success:(void (^)(void))success;
 - (void)logout;
 
 @end

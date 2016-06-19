@@ -49,7 +49,7 @@
     NSLog(@"looped");
     if ([factsArray count] == 20) {
         [[[[[FIRDatabase database] reference] child:@"users"] child:user.uid] setValue:@{@"facts":factsArray}];
-        [RMDUser login:[NSString stringWithFormat:@"%@", user.uid] withFacts:factsArray];
+        [RMDUser login:[NSString stringWithFormat:@"%@", user.uid] withFacts:factsArray[0]];
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         [self fetchFacts:^(NSArray *response) {

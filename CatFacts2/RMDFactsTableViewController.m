@@ -40,6 +40,7 @@
         _facts = [RMDUser currentUser].facts;
         
         [self.tableView reloadData];
+        NSLog(@"%lu", (unsigned long)[[RMDUser currentUser].facts count]);
     } else {
         [self presentViewController:self.signInNavVC animated:YES completion:nil];
     }
@@ -94,6 +95,50 @@
             usedRectForTextContainer:textContainer].size.height;
 }
 
+- (void)fetchNextPage {
+    NSLog(@"fact count %lu", (unsigned long)[self.facts count]);
+    if ([self.facts count] == 2000) {
+        [self presentAlertWithTitle:@"No More Facts" message:@"Sorry, that's all the facts I have"];
+    } else {
+        NSString *userID = [FIRAuth auth].currentUser.uid;
+        [[[[[FIRDatabase database] reference] child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            if (snapshot.value[@"facts"]) {
+                NSArray *newPage = snapshot.value[@"facts"][(int)[self.facts count] / 100 + 1];
+                NSArray *currentFacts = self.facts;
+                self.facts = [currentFacts arrayByAddingObjectsFromArray:newPage];
+                NSLog(@"fact count after %lu", (unsigned long)[self.facts count]);
+                [self.tableView reloadData];
+            } else {
+                NSLog(@"no facts in database");
+            }
+        } withCancelBlock:^(NSError * _Nonnull error) {
+            NSLog(@"%@", error.localizedDescription);
+        }];
+    }
+}
+
+- (void)presentAlertWithTitle:(NSString *)title message:(NSString *)message {
+    if ([UIAlertController class]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title                                                                       message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:dismissAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles: nil];
+        [alert show];
+    }
+    
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -101,33 +146,51 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.facts count];
+    return [self.facts count] + 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    cell.textLabel.text = [self.facts objectAtIndex:indexPath.row];
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.textLabel.numberOfLines = 0;
-    cell.imageView.translatesAutoresizingMaskIntoConstraints = NO;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (indexPath.row % 2 == 0) {
-        cell.contentView.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
-        cell.imageView.image = [UIImage imageNamed:@"CatFace"];
+    if (indexPath.row != [self.facts count]) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell.textLabel.text = [self.facts objectAtIndex:indexPath.row];
+        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.textLabel.numberOfLines = 0;
+        cell.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (indexPath.row % 2 == 0) {
+            cell.contentView.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
+            cell.imageView.image = [UIImage imageNamed:@"CatFace"];
+        } else {
+            cell.contentView.backgroundColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0];
+            cell.textLabel.textColor = [UIColor whiteColor];
+            cell.imageView.image = [UIImage imageNamed:@"CatFace2"];
+        }
+        return cell;
     } else {
-        cell.contentView.backgroundColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0];
-        cell.textLabel.textColor = [UIColor whiteColor];
-        cell.imageView.image = [UIImage imageNamed:@"CatFace2"];
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"loadmore"];
+        cell.textLabel.text = @"Load More Facts";
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.contentView.backgroundColor = [UIColor colorWithRed:1 green:0.929 blue:0.784 alpha:1.0];
+        return cell;
     }
-    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == [self.facts count]) {
+        [self fetchNextPage];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    float stringHeight = [self heightForStringDrawing:[self.facts objectAtIndex:indexPath.row] font:[UIFont fontWithName:@"Helvetica" size:17] width:self.tableView.frame.size.width - 120];
-    return MAX(stringHeight, 120);
+    if (indexPath.row != [self.facts count]) {
+        float stringHeight = [self heightForStringDrawing:[self.facts objectAtIndex:indexPath.row] font:[UIFont fontWithName:@"Helvetica" size:17] width:self.tableView.frame.size.width - 120];
+        return MAX(stringHeight, 120);
+    } else {
+        return 44;
+    }
 }
 
 @end
