@@ -9,12 +9,14 @@
 #import "RMDFactsTableViewController.h"
 #import "RMDSignInViewController.h"
 #import "RMDUser.h"
+#import "MRProgress.h"
 
 @interface RMDFactsTableViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UINavigationController *signInNavVC;
 @property (nonatomic, strong) NSArray *facts;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -27,7 +29,7 @@
     navItem.title = @"Cat Facts";
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStylePlain target:self action:@selector(logOut)];
-
+    
     RMDSignInViewController *signInVC = [[RMDSignInViewController alloc] init];
     self.signInNavVC = [[UINavigationController alloc] initWithRootViewController:signInVC];
     [self.signInNavVC.navigationBar setTintColor:[UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0]];
@@ -40,7 +42,6 @@
         _facts = [RMDUser currentUser].facts;
         
         [self.tableView reloadData];
-        NSLog(@"%lu", (unsigned long)[[RMDUser currentUser].facts count]);
     } else {
         [self presentViewController:self.signInNavVC animated:YES completion:nil];
     }
@@ -96,23 +97,25 @@
 }
 
 - (void)fetchNextPage {
-    NSLog(@"fact count %lu", (unsigned long)[self.facts count]);
     if ([self.facts count] == 2000) {
         [self presentAlertWithTitle:@"No More Facts" message:@"Sorry, that's all the facts I have"];
     } else {
+        [MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
         NSString *userID = [FIRAuth auth].currentUser.uid;
         [[[[[FIRDatabase database] reference] child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             if (snapshot.value[@"facts"]) {
                 NSArray *newPage = snapshot.value[@"facts"][(int)[self.facts count] / 100 + 1];
                 NSArray *currentFacts = self.facts;
                 self.facts = [currentFacts arrayByAddingObjectsFromArray:newPage];
-                NSLog(@"fact count after %lu", (unsigned long)[self.facts count]);
                 [self.tableView reloadData];
+                [MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
             } else {
                 NSLog(@"no facts in database");
+                [MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
             }
         } withCancelBlock:^(NSError * _Nonnull error) {
             NSLog(@"%@", error.localizedDescription);
+            [MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
         }];
     }
 }

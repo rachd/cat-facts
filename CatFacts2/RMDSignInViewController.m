@@ -9,10 +9,12 @@
 #import "RMDSignInViewController.h"
 #import "RMDRegisterViewController.h"
 #import "RMDUser.h"
+#import "MRProgress.h"
 
 @interface RMDSignInViewController ()
 
 @property (nonatomic, strong) RMDSignInView *signInView;
+//@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -22,7 +24,6 @@
     [super viewDidLoad];
     self.signInView = [[RMDSignInView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:self.signInView];
-    
     UINavigationItem *navItem = self.navigationItem;
     navItem.title = @"Sign In";
 }
@@ -46,13 +47,15 @@
 - (void)signInUser {
     NSString *email = self.signInView.emailField.text;
     NSString *password = self.signInView.passwordField.text;
-    
+    [MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
     [[FIRAuth auth] signInWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
         if (error) {
             [self presentAlertWithTitle:@"Error" message:@"Could not register user. Ensure a valid email and internet connection and try again."];
+            [MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
         } else {
             [RMDUser login:[NSString stringWithFormat:@"%@", user.uid] success:^(void) {
                 NSLog(@"in signin vc %lu", (unsigned long)[[RMDUser currentUser].facts count]);
+                [MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
                 [self dismissViewControllerAnimated:YES completion:nil];
             }];
         }

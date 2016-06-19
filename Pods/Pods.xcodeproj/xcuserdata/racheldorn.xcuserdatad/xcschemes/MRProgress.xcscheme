@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7335BA1CF6FB209A30ED47D9'
-               BlueprintName = 'Pods-CatFacts2'
+               BlueprintIdentifier = 'AE93DDB54AAA00B401D018E0'
+               BlueprintName = 'MRProgress'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libPods-CatFacts2.a'>
+               BuildableName = 'libMRProgress.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

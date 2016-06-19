@@ -8,6 +8,7 @@
 
 #import "RMDRegisterViewController.h"
 #import "RMDUser.h"
+#import "MRProgress.h"
 
 @interface RMDRegisterViewController ()
 
@@ -21,7 +22,6 @@
     [super viewDidLoad];
     self.registerView = [[RMDRegisterView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:self.registerView];
-    
     UINavigationItem *navItem = self.navigationItem;
     navItem.title = @"Register";
 }
@@ -36,9 +36,11 @@
     NSString *password = self.registerView.passwordField.text;
     
     NSMutableArray *facts = [[NSMutableArray alloc] init];
+    [MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
     [[FIRAuth auth] createUserWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
         if (error) {
             [self presentAlertWithTitle:@"Error" message:@"Could not register user. Ensure a valid email and internet connection and try again."];
+            [MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
         } else {
             [self retrieveAllFacts:facts user:user];
         }
@@ -50,12 +52,14 @@
     if ([factsArray count] == 20) {
         [[[[[FIRDatabase database] reference] child:@"users"] child:user.uid] setValue:@{@"facts":factsArray}];
         [RMDUser login:[NSString stringWithFormat:@"%@", user.uid] withFacts:factsArray[0]];
+        [MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         [self fetchFacts:^(NSArray *response) {
             [factsArray addObject:response];
             [self retrieveAllFacts:factsArray user:user];
         } failure:^(NSError *error) {
+            [MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
             [self presentAlertWithTitle:@"Error" message:@"Could not retrieve facts. Please check your internet connection and try again"];
         }];
     }

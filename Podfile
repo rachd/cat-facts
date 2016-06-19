@@ -8,6 +8,7 @@ target 'CatFacts2' do
 pod 'Firebase'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
+pod 'MRProgress'
 
 end
 

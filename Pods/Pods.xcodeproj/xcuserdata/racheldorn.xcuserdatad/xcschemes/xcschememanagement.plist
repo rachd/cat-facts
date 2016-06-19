@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>MRProgress.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-CatFacts2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -12,7 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>12035B580CE6D9225C2EA46DE4A8B5B6</key>
+		<key>8570A42CA7975311B4D2DDCB2303977B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C725C103E391E1DD09082665BEB7CA0B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
