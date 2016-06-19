@@ -100,7 +100,8 @@
     if ([self.facts count] == 2000) {
         [self presentAlertWithTitle:@"No More Facts" message:@"Sorry, that's all the facts I have"];
     } else {
-        [MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
+        MRProgressOverlayView *overlayView = [MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
+        overlayView.tintColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0];
         NSString *userID = [FIRAuth auth].currentUser.uid;
         [[[[[FIRDatabase database] reference] child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             if (snapshot.value[@"facts"]) {

@@ -47,7 +47,8 @@
 - (void)signInUser {
     NSString *email = self.signInView.emailField.text;
     NSString *password = self.signInView.passwordField.text;
-    [MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
+    MRProgressOverlayView *overlayView = [MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
+    overlayView.tintColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0];
     [[FIRAuth auth] signInWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
         if (error) {
             [self presentAlertWithTitle:@"Error" message:@"Could not register user. Ensure a valid email and internet connection and try again."];
