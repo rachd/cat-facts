@@ -162,6 +162,7 @@
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         cell.textLabel.numberOfLines = 0;
         cell.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+        cell.textLabel.translatesAutoresizingMaskIntoConstraints = NO;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.row % 2 == 0) {
             cell.contentView.backgroundColor = [UIColor colorWithRed:1.0 green:0.8 blue:0.4 alpha:1.0];
@@ -190,8 +191,13 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row != [self.facts count]) {
-        float stringHeight = [self heightForStringDrawing:[self.facts objectAtIndex:indexPath.row] font:[UIFont fontWithName:@"Helvetica" size:17] width:self.tableView.frame.size.width - 120];
-        return MAX(stringHeight, 120);
+        //float stringHeight = [self heightForStringDrawing:[self.facts objectAtIndex:indexPath.row] font:[UIFont fontWithName:@"Helvetica" size:17] width:self.tableView.frame.size.width - 110];
+        NSString *text = [self.facts objectAtIndex:indexPath.row];
+        UIFont *font = [UIFont fontWithName:@"Helvetica" size:17];
+        CGSize constraintSize = CGSizeMake(self.tableView.frame.size.width - 120, MAXFLOAT);
+        CGSize labelSize = [text sizeWithFont:font constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
+        return MAX(labelSize.height + 15, 120);
+        //return MAX(stringHeight + 30, 120);
     } else {
         return 44;
     }
