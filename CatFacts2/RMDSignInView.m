@@ -68,7 +68,7 @@
     [self.registerButton setTitle:@"Register" forState:UIControlStateNormal];
     [self.registerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.registerButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
-    [self.registerButton addTarget:self.delegate action:@selector(showRegisterView) forControlEvents:UIControlEventTouchUpInside];
+    [self.registerButton addTarget:self.delegate action:@selector(registerUser) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.registerButton];
 }
 

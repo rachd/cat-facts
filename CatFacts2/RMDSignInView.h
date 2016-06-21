@@ -12,7 +12,7 @@
 
 @required
 - (void)signInUser;
-- (void)showRegisterView;
+- (void)registerUser;
 
 @end
 

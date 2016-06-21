@@ -14,7 +14,6 @@
 @interface RMDSignInViewController ()
 
 @property (nonatomic, strong) RMDSignInView *signInView;
-//@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -63,9 +62,55 @@
     }];
 }
 
-- (void)showRegisterView {
-    RMDRegisterViewController *registerVC = [[RMDRegisterViewController alloc] init];
-    [self.navigationController pushViewController:registerVC animated:YES];
+- (void)registerUser {
+    NSString *email = self.signInView.emailField.text;
+    NSString *password = self.signInView.passwordField.text;
+    
+    NSMutableArray *facts = [[NSMutableArray alloc] init];
+    MRProgressOverlayView *overlayView = [MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
+    overlayView.tintColor = [UIColor colorWithRed:1.0 green:0.2 blue:0.6 alpha:1.0];
+    [[FIRAuth auth] createUserWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+        if (error) {
+            [self presentAlertWithTitle:@"Error" message:@"Could not register user. Ensure a valid email and internet connection and try again."];
+            [MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
+        } else {
+            [self retrieveAllFacts:facts user:user];
+        }
+    }];
+}
+
+- (void)retrieveAllFacts:(NSMutableArray *)factsArray user:(FIRUser *)user {
+    NSLog(@"looped");
+    if ([factsArray count] == 20) {
+        [[[[[FIRDatabase database] reference] child:@"users"] child:user.uid] setValue:@{@"facts":factsArray}];
+        [RMDUser login:[NSString stringWithFormat:@"%@", user.uid] withFacts:factsArray[0]];
+        [MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [self fetchFacts:^(NSArray *response) {
+            [factsArray addObject:response];
+            [self retrieveAllFacts:factsArray user:user];
+        } failure:^(NSError *error) {
+            [MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
+            [self presentAlertWithTitle:@"Error" message:@"Could not retrieve facts. Please check your internet connection and try again"];
+        }];
+    }
+}
+
+- (void)fetchFacts:(void (^)(NSArray *response))success failure:(void(^)(NSError* error))failure {
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://catfacts-api.appspot.com/api/facts?number=100"]] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (response) {
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                success([json objectForKey:@"facts"]);
+            });
+        } else {
+            NSArray *blankArray = [[NSArray alloc] initWithObjects:@"Please check your internet connection and try again", nil];
+            success(blankArray);
+        }
+    }];
+    [dataTask resume];
 }
 
 - (void)presentAlertWithTitle:(NSString *)title message:(NSString *)message {

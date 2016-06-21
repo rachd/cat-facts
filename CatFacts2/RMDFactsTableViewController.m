@@ -195,7 +195,7 @@
         NSString *text = [self.facts objectAtIndex:indexPath.row];
         UIFont *font = [UIFont fontWithName:@"Helvetica" size:17];
         CGSize constraintSize = CGSizeMake(self.tableView.frame.size.width - 120, MAXFLOAT);
-        CGSize labelSize = [text sizeWithFont:font constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
+        CGSize labelSize = [text sizeWithFont:font constrainedToSize:constraintSize lineBreakMode:NSLineBreakByWordWrapping];
         return MAX(labelSize.height + 15, 120);
         //return MAX(stringHeight + 30, 120);
     } else {
