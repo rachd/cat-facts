@@ -25,6 +25,12 @@
     [self.view addSubview:self.signInView];
     UINavigationItem *navItem = self.navigationItem;
     navItem.title = @"Sign In";
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.signInView addGestureRecognizer:tap];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -111,6 +117,10 @@
         }
     }];
     [dataTask resume];
+}
+
+-(void)dismissKeyboard {
+    [self.signInView.passwordField resignFirstResponder];
 }
 
 - (void)presentAlertWithTitle:(NSString *)title message:(NSString *)message {
